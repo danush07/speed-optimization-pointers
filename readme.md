@@ -235,9 +235,14 @@ Place the following script before closing `</body>` in `theme.liquid`:
 ```
 
 **For Scripts:**
+
 Defer non-essential third-party or custom scripts using:
 ```html
-<script type="deferjs" data-src="https://example.com/your-script.js"></script>
+<script type="lazy-script" src="https://example.com/your-script.js"></script>
+<script>
+      Defer.dom('.lazyload.img');
+      Defer.all('script[type="lazy-script"]', 0, true);
+</script>
 ```
 
 ---
