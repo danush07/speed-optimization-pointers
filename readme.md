@@ -38,6 +38,8 @@ This document outlines the steps and best practices implemented to improve the p
   height: auto;
   ```
 - ✅ Use placeholder containers or skeleton loaders to preserve layout while lazy-loading content.
+- ✅ Preload the base.css / theme.css file to load the css file to improve the FCP
+  ``` liquid {{ 'base.css' | asset_url | stylesheet_tag: preload: true }}```
 
 ---
 
