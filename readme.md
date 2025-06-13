@@ -244,6 +244,38 @@ Defer non-essential third-party or custom scripts using:
       Defer.all('script[type="lazy-script"]', 0, true);
 </script>
 ```
+**For disabling apps from loading through content_from_header:**
+
+```liquid
+    {% comment %}
+      <!-- content for header -->
+    {% endcomment %}
+    {%- capture h_content -%}{{ content_for_header }}{%- endcapture -%}
+    {% case template %}
+      {% when 'index' %}
+        {{-
+          h_content
+          | remove: 'https:\/\/app.kiwisizing.com\/web\/js\/dist\/kiwiSizing\/plugin\/SizingPlugin.prod.js?v=311\u0026shop=thelabellifekids.myshopify.com'
+          | remove: 'https:\/\/cdn1.judge.me\/assets\/installed.js?shop=thelabellifekids.myshopify.com'
+        -}}
+        {%- when 'collection' -%}
+        {{-
+          h_content
+          | remove: 'https:\/\/app.kiwisizing.com\/web\/js\/dist\/kiwiSizing\/plugin\/SizingPlugin.prod.js?v=311\u0026shop=thelabellifekids.myshopify.com'
+          | remove: 'https:\/\/cdn1.judge.me\/assets\/installed.js?shop=thelabellifekids.myshopify.com'
+        -}}
+        {%- when 'product' -%}
+        {{-
+          h_content
+          | remove: 'https:\/\/cdn1.judge.me\/assets\/installed.js?shop=thelabellifekids.myshopify.com'
+        -}}
+      {% else %}
+        {{- content_for_header -}}
+    {% endcase %}
+    {% comment %}
+      <!-- content for header -->
+    {% endcomment %}
+```
 
 ---
 
